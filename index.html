@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/handlebars.js"></script>
+<script type="text/javascript">
+	window.app = {};
+</script>
+</head>
+<body>
+<div id="Wrap">
+
+<script id="entry-template1" type="text/x-handlebars-template">
+  <div class="entry">
+  <h1>{{title}}</h1>
+  <div class="body">
+    {{body}}
+  </div>
+  <div onClick="window.app.{{next}}" class="btn-next">next</div>
+  <button onClick="window.app.aboutPage()">About</button>
+</div>
+</script>
+
+<script type="test/x-handlebars-template" id="About-template">
+	<h1>About us</h1>
+</script>
+<div id="About"></div>
+
+<div id="Page1"></div>
+<div id="Page2"></div>
+<div id="Page3"></div>
+<div id="Page4"></div>
+</div>
+
+<script type="text/javascript">
+window.app.aboutPage = function (options) {
+	for (var i = 0; i < 6; i++) {
+		$('#Page'+i).hide();
+	};
+	var source   = $("#About-template").html();
+	var	template = Handlebars.compile(source);
+	var context = {title: "My New Post22", body: "just another post2", next: 'callPage(3)'}
+	var html    = template(context);
+	$("#About").html(html).show();
+}
+
+window.app.callPage = function (argument) {
+	//hide
+	$('#Page' + (argument-1)).hide();
+	
+	switch(argument){
+		case 2:
+			var source   = $("#entry-template1").html();
+			var	template = Handlebars.compile(source);
+			var context = {title: "My New Post22", body: "just another post2", next: 'callPage(3)'}
+			var html    = template(context);
+			$("#Page2").html(html).show();
+		break;
+		case 3:
+			var source   = $("#entry-template1").html();
+			var	template = Handlebars.compile(source);
+			var context = {title: "yay page 3", body: "wow wow", next: 'callPage(4)'}
+			var html    = template(context);
+			$("#Page3").html(html).show();
+			break;
+		case 4:
+			var source   = $("#entry-template1").html();
+			var	template = Handlebars.compile(source);
+			var context = {title: "yay page 4", body: "the end", next: 'callPage(5)'}
+			var html    = template(context);
+			$("#Page4").html(html).show();
+		break;
+		default:
+			var source   = $("#entry-template1").html();
+			var template = Handlebars.compile(source);
+			var context = {title: "My New Post", body: "This is my first post!", next: 'callPage(2)'}
+			var html    = template(context);
+			$("#Page1").html(html).show();
+		break;
+	}
+
+	
+}
+	
+$(document).ready(function(){
+	window.app.callPage(1);
+});
+</script>
+</body>
+</html>
