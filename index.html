@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel=​"stylesheet" type=​"text/​css" href=​"css/style.css">​
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/handlebars.js"></script>
 <script type="text/javascript">
 	window.app = {};
@@ -43,7 +44,6 @@ window.app.aboutPage = function (options) {
 	var html    = template(context);
 	$("#About").html(html).show();
 }
-
 window.app.callPage = function (argument) {
 	//hide
 	$('#Page' + (argument-1)).hide();
